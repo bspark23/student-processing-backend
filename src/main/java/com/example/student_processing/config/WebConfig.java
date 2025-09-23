@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                     "http://localhost:3000", 
                     "https://*.netlify.app",
                     "https://*.netlify.com",
-                    "https://*.onrender.com"
+                    "https://*.fly.dev"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
