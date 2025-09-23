@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 3px; }
+        .error { background: #f8d7da; color: #721c24; }
+        .success { background: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Processing System - Backend API Test</h1>
+        
+        <div class="test-section">
+            <h3>1. Test Backend Connection</h3>
+            <button onclick="testConnection()">Test Connection</button>
+            <div id="connectionResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>2. Test File Generation (GET - Browser Compatible)</h3>
+            <button onclick="testFileGeneration()">Generate Test Excel (10 records)</button>
+            <a href="/api/test-files/generate-excel?numberOfRecords=5" target="_blank">
+                <button>Download Excel (5 records)</button>
+            </a>
+            <div id="fileResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>3. Test Student API</h3>
+            <button onclick="testStudents()">Get All Students</button>
+            <button onclick="testStudentStats()">Get Statistics</button>
+            <div id="studentResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>4. Frontend Connection Test</h3>
+            <p>Frontend should be running on: <a href="http://localhost:4200" target="_blank">http://localhost:4200</a></p>
+            <p>Backend is running on: <a href="http://localhost:8085" target="_blank">http://localhost:8085</a></p>
+        </div>
+    </div>
+
+    <script>
+        async function testConnection() {
+            const resultDiv = document.getElementById('connectionResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing connection...';
+            
+            try {
+                const response = await fetch('/api/test/hello');
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ Connection successful: ${data.message}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Connection failed: ${error.message}`;
+            }
+        }
+
+        async function testFileGeneration() {
+            const resultDiv = document.getElementById('fileResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing file generation...';
+            
+            try {
+                const response = await fetch('/api/test-files/status');
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ File service working: ${data.message}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ File service failed: ${error.message}`;
+            }
+        }
+
+        async function testStudents() {
+            const resultDiv = document.getElementById('studentResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing student API...';
+            
+            try {
+                const response = await fetch('/api/students');
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ Students API working. Found ${data.length} students.`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Students API failed: ${error.message}`;
+            }
+        }
+
+        async function testStudentStats() {
+            const resultDiv = document.getElementById('studentResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing statistics API...';
+            
+            try {
+                const response = await fetch('/api/students/stats');
+                const data = await response.json();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ Statistics API working. Total students: ${data.totalStudents}, Total classes: ${data.totalClasses}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Statistics API failed: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
