@@ -48,12 +48,7 @@ A Spring Boot REST API for managing student data with file processing capabiliti
 
 ## Environment Variables
 
-For Railway deployment, set these environment variables:
 
-- `DATABASE_URL` - PostgreSQL connection URL (automatically set by Railway)
-- `DATABASE_USERNAME` - Database username (automatically set by Railway)
-- `DATABASE_PASSWORD` - Database password (automatically set by Railway)
-- `PORT` - Server port (automatically set by Railway)
 
 ## Local Development
 
@@ -65,15 +60,8 @@ For Railway deployment, set these environment variables:
    ```
 
 ## Deployment
+deployed to fly.io
 
-### Railway Deployment
-
-1. Connect your GitHub repository to Railway
-2. Railway will automatically detect the Spring Boot application
-3. Add a PostgreSQL database service
-4. Deploy!
-
-The application will be available at your Railway-provided URL.
 
 ## Database Schema
 
