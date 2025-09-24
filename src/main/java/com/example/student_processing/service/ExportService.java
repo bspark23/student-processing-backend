@@ -64,10 +64,15 @@ public class ExportService {
                 row.createCell(7).setCellValue(student.getScore());
             }
 
-            // Auto-size columns
-            for (int i = 0; i < headers.length; i++) {
-                sheet.autoSizeColumn(i);
-            }
+            // Set column widths manually (autoSizeColumn doesn't work in headless environment)
+            sheet.setColumnWidth(0, 2000);  // ID
+            sheet.setColumnWidth(1, 3000);  // Student ID
+            sheet.setColumnWidth(2, 4000);  // First Name
+            sheet.setColumnWidth(3, 4000);  // Last Name
+            sheet.setColumnWidth(4, 5000);  // Full Name
+            sheet.setColumnWidth(5, 3000);  // Class
+            sheet.setColumnWidth(6, 3500);  // Date of Birth
+            sheet.setColumnWidth(7, 2500);  // Score
 
             workbook.write(outputStream);
             return outputStream.toByteArray();

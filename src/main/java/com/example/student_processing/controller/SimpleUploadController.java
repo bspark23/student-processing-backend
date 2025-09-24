@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class SimpleUploadController {
 
     @PostMapping("/upload")

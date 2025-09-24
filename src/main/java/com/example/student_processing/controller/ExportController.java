@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/export")
-@CrossOrigin(origins = "*")
 public class ExportController {
 
     private final ExportService exportService;

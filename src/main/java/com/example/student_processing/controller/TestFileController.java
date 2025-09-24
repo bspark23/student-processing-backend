@@ -11,7 +11,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/test-files")
-@CrossOrigin(origins = "*")
 public class TestFileController {
 
     private final FileProcessingService fileProcessingService;

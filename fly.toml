@@ -3,11 +3,16 @@ primary_region = "iad"
 
 [build]
   builder = "paketobuildpacks/builder:base"
-  buildpacks = ["gcr.io/paketo-buildpacks/java"]
+  buildpacks = ["paketo-buildpacks/java"]
 
 [env]
   PORT = "8080"
-  JAVA_OPTS = "-Xmx512m"
+  JAVA_OPTS = "-Xmx400m -XX:MaxMetaspaceSize=80m -XX:ReservedCodeCacheSize=24m -Xss256k -XX:+UseG1GC -XX:+UseStringDeduplication"
+  BPL_JVM_THREAD_COUNT = "30"
+  BPL_JVM_HEAD_ROOM = "5"
+  H2_CONSOLE_ENABLED = "false"
+  SHOW_SQL = "false"
+  SPRING_PROFILES_ACTIVE = "production"
 
 [http_service]
   internal_port = 8080
@@ -27,7 +32,7 @@ primary_region = "iad"
 [vm]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 512
+  memory_mb = 1024
 
 [[statics]]
   guest_path = "/app/static"
